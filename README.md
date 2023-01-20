@@ -35,6 +35,4 @@ Le logiciel fonctionne de la manière suivante :
 - [x] Permuter entre les valeurs en utilisant un bouton poussoir
 
 
-
-
-
+![Capture8](https://user-images.githubusercontent.com/17486030/213680061-095bb24a-6436-45fc-98af-a5a2c3427600.PNG)
