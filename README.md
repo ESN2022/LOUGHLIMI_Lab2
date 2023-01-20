@@ -5,7 +5,7 @@
 Le laboratoire 2, intitulé "Let's count stuff", a pour objectif de créer un système Nios II de base, d'implémenter un compteur décimal à un chiffre et de l'afficher sur un afficheur 7 segments. Pour ce faire, nous devrons écrire le logiciel du compteur, créer un composant bin_to_7seg.vhd et câbler le système. Nous poursuivrons ensuite en implémentant un compteur à trois chiffres et en l'affichant sur un afficheur 7 segments en utilisant soit du matériel ou du logiciel pour convertir le nombre en BCD. Enfin, nous ajouterons un timer à notre design pour compter avec des interruptions et en écrivant une ISR (Interruption Service Routine) pour incrémenter un compteur à 4 bits, la valeur du compteur étant envoyée à une instance VHDL et en concevant un décodeur binaire vers 7 segments
 
 
-![Capture5](https://user-images.githubusercontent.com/17486030/213668340-39e82fb5-3730-42ff-b852-da3093372db8.PNG)
+![Capture2](https://user-images.githubusercontent.com/17486030/213681466-f6b7a37a-0d9a-4250-a37c-757ad7ddd8f8.PNG)
 
 
 ##  Partie matérielle :
@@ -15,7 +15,7 @@ Dans ce laboratoire, nous utilisons un système de blocs (qsys) qui comprend non
 En ce qui concerne les blocs matériels que j'ai codés personnellement, ils sont au nombre de trois. Le premier, appelé DoubleDabble, reçoit la valeur du compteur du logiciel et retourne cette même valeur décomposée en centaine, dizaine et unités. Le deuxième, appelé bin_to_7seg, prend en entrée l’une des trois sorties du bloc précédent et se charge de l’afficher correctement sur un afficheur 7 segments. Le dernier, appelé Top-Level Entities, permet de câbler le bloc qsys avec les blocs précédents et les pins de la clock, du bouton poussoir pour le reset, des 3 afficheurs 7 segments et des 8 switchs.
 
 
-![Capture6](https://user-images.githubusercontent.com/17486030/213668601-d6bcc858-94ff-428d-a036-246e3175e557.PNG)
+![Capture3](https://user-images.githubusercontent.com/17486030/213681586-6fe70bed-ebfa-4512-bdbd-dcb6859ac010.PNG)
 
 
 
@@ -32,4 +32,5 @@ Le logiciel fonctionne de la manière suivante :
 
 
 
-![Capture8](https://user-images.githubusercontent.com/17486030/213680061-095bb24a-6436-45fc-98af-a5a2c3427600.PNG)
+
+
