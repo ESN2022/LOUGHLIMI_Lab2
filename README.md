@@ -1,38 +1,34 @@
 # LOUGHLIMI_lab2
 
-## Introduction: 
-## Matériel:
+## LAB-2 _ Counter :
+## Introduction:
+Le laboratoire 2, intitulé "Let's count stuff", a pour objectif de créer un système Nios II de base, d'implémenter un compteur décimal à un chiffre et de l'afficher sur un afficheur 7 segments. Pour ce faire, nous devrons écrire le logiciel du compteur, créer un composant bin_to_7seg.vhd et câbler le système. Nous poursuivrons ensuite en implémentant un compteur à trois chiffres et en l'affichant sur un afficheur 7 segments en utilisant soit du matériel ou du logiciel pour convertir le nombre en BCD. Enfin, nous ajouterons un timer à notre design pour compter avec des interruptions et en écrivant une ISR (Interruption Service Routine) pour incrémenter un compteur à 4 bits, la valeur du compteur étant envoyée à une instance VHDL et en concevant un décodeur binaire vers 7 segments
 
-La carte Intel DE10-Lite est une carte de développement pour système embarqué basée sur le FPGA (Field-Programmable Gate Array) Intel Cyclone V SE. 
-Elle est conçue pour faciliter le développement et l'apprentissage en matière de conception de circuits numériques, d'architecture de système et de programmation de FPGA. 
-Elle possède des ports d'entrée/sortie numériques et analogiques( d’un USB Blaster, de 64 MB de SDRAM, de 10 LEDs, 10 switchs et 2 boutons poussoirs.), ainsi qu'un accès à un processeur ARM Cortex-A9 pour une flexibilité accrue dans les applications embarquées.
 
-![vv](https://user-images.githubusercontent.com/17486030/213537754-a8596423-053c-4a61-955d-452a68b3894b.png)
+![Capture2](https://user-images.githubusercontent.com/17486030/213640047-37cb801a-c2bb-4195-a1fd-bed34a3f3e94.PNG)
 
-## L’outil utilisé:
-
-L’outil utilisé dans ce TP est quartus 18.1 et Platform Designer qui permet de spécifier les exigences d'interface et d'intégrer les composants IP dans une représentation graphique du système. L'installation du logiciel Intel® Quartus® Prime comprend la bibliothèque IP FPGA d'Intel disponible dans le catalogue IP de Platform Designer.
-
-il permet aussi d'intégrer des cœurs IP FPGA Intel optimisés et vérifiés dans une conception pour raccourcir les cycles de conception et maximiser les performances. Platform Designer prend également en charge l'intégration de cœurs IP de tiers ou de composants personnalisés que vous définissez.
-
-## LAB-1 _ Let there be light :
 
 ##  Partie matérielle :
 
-Le bloc matériel créé pour ce projet contient un horloge , Nios 2 processor , jtag uart une mémoire ram,  2 pio pour contrôler les entrées (les switchs) et les sorties  (les LEDs), et une bouton pousoire pour le control du Reset .
+Dans ce laboratoire, nous utilisons un système de blocs (qsys) qui comprend non seulement la base, mais aussi deux composants PIO (Peripheral Input/Output) et un composant timer. Le premier PIO permet de transmettre la valeur du compteur de la partie logicielle vers la partie matérielle, tandis que le second PIO permet à la partie logicielle de récupérer les états des 8 premiers switchs. Le timer, quant à lui, permet de déclencher une interruption régulièrement.
 
-![ss](https://user-images.githubusercontent.com/17486030/213538541-2d15a957-9547-4fb9-8f88-bfecb0df5cc5.png)
+En ce qui concerne les blocs matériels que j'ai codés personnellement, ils sont au nombre de trois. Le premier, appelé DoubleDabble, reçoit la valeur du compteur du logiciel et retourne cette même valeur décomposée en centaine, dizaine et unités. Le deuxième, appelé bin_to_7seg, prend en entrée l’une des trois sorties du bloc précédent et se charge de l’afficher correctement sur un afficheur 7 segments. Le dernier, appelé Top-Level Entities, permet de câbler le bloc qsys avec les blocs précédents et les pins de la clock, du bouton poussoir pour le reset, des 3 afficheurs 7 segments et des 8 switchs.
+
+![Capture3](https://user-images.githubusercontent.com/17486030/213640517-770c9214-ef93-476c-9d16-a8b1f4d4b2b9.PNG)
 
 
 
 ## Partie Logicielle
 
-le code fourni dans ce projet (le fichier /Software/Main.C ) , permet:
+Le logiciel fonctionne de la manière suivante :
 
-- [x] d'initialiser le motif en allumant la première LED, ce motif sera défini sur toutes les LED en les allumant une à une et continuera à l'infini.
- 
-- [x] La vitesse de fonctionnement est configurable par les interrupteurs.
+- [x] Tout d'abord, la période du timer, qui détermine la vitesse de comptage, est modulée en fonction de la valeur numérique sur 7 bits qui résulte de l'état des 7 premiers switchs.
+- [x] Ensuite, le timer est démarré.
+- [x] Lorsque le timer arrive à zéro, il déclenche la fonction d'interruption prévue.
+- [x] Selon la position du 8ème switch, la valeur du compteur est incrémentée ou décrémentée en restant entre 0 et 999. Cette valeur est ensuite transmise au composant DoubleDabble.
+- [x] La période du timer est de nouveau modulée en utilisant la même méthode.
+- [x] Enfin, le timer est redémarré pour continuer à compter.
 
-- [x] Le bouton poussoir est utilisé pour réinitialiser le fonctionnement.
+
 
 
