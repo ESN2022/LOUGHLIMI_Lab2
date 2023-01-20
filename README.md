@@ -34,3 +34,4 @@ Le logiciel fonctionne de la manière suivante :
 
 
 
+![Capture99](https://user-images.githubusercontent.com/17486030/213682179-6743ba87-fa91-447d-9662-778a31841440.PNG)
