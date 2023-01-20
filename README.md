@@ -1,4 +1,4 @@
-# LOUGHLIMI_lab1
+# LOUGHLIMI_lab2
 
 ## Introduction: 
 ## Matériel:
